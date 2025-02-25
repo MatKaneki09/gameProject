@@ -1,7 +1,18 @@
 from flask import render_template, request, redirect, url_for, flash
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash
 from .app import app, db
 from .models import User
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+@app.route('/signin', methods=['GET', 'POST'])
+def signin():
+    if request.method == 'POST':
+        # Logic to sign in
+        pass  # Ajouter la logique de connexion
+    return render_template('signin.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -39,20 +50,3 @@ def signup():
         return redirect(url_for('signin'))
 
     return render_template('signup.html')
-
-@app.route('/signin', methods=['GET', 'POST'])
-def signin():
-    if request.method == 'POST':
-        pseudo = request.form['pseudo']
-        password = request.form['password']
-
-        # Vérification des identifiants
-        user = User.query.filter_by(pseudo=pseudo).first()
-        if user and check_password_hash(user.password, password):
-            flash("Connexion réussie.", "success")
-            return redirect(url_for('dashboard'))  # Redirection vers le dashboard après connexion
-        else:
-            flash("Identifiants incorrects.", "error")
-            return redirect(url_for('signin'))
-
-    return render_template('signin.html')
