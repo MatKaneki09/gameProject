@@ -28,8 +28,8 @@ class Carte_Collection(db.Model):
     quantite = db.Column(db.Integer, nullable=False)
 
 @app.route('/')
-def index():
-    return "Bienvenue dans l'ouverture de booster !"
+def presentation():
+    return render_template('index.html')
 
 if __name__ == "__main__":
     db.create_all()  # Crée toutes les tables à partir des modèles définis
