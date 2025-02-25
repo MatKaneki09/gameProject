@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+    <title>Connexion</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+
     <div class="container">
-        <h2>Inscription</h2>
-        <form method="POST" action="/signup">
-            <div class="form-group">
+        <h1>Se connecter2222222</h1>
+        <form method="POST">
+            <div>
                 <label for="pseudo">Pseudo</label>
-                <input type="text" id="pseudo" name="pseudo" required>
+                <input type="text" name="pseudo" required>
             </div>
-            <div class="form-group">
+            <div>
                 <label for="password">Mot de passe</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" name="password" required>
             </div>
-            <button type="submit">S'inscrire</button>
+            <button type="submit">Se connecter</button>
         </form>
-        <p>Déjà un compte ? <a href="/signin">Se connecter</a></p>
+        <p>Pas encore de compte ? <a href="{{ url_for('signup') }}">Inscrivez-vous ici</a></p>
     </div>
+
 </body>
 </html>
