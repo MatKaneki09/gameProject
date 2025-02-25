@@ -49,4 +49,8 @@ def signup():
         flash("Inscription réussie, vous pouvez maintenant vous connecter.", "success")
         return redirect(url_for('signin'))
 
+@app.route('/booster')
+def booster():
+    return render_template('booster.html')
+    
     return render_template('signup.html')
