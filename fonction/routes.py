@@ -1,34 +1,41 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
-from fonction.models import db, User
-from fonction.forms import SignupForm
+from flask import render_template, request, redirect, url_for, flash
+from werkzeug.security import generate_password_hash
+from .app import app, db
+from .models import User
 
-routes = Blueprint('routes', __name__)
-
-# Page d'accueil
-@routes.route('/')
-def presentation():
-    return render_template('index.html')
-
-# Page d'inscription
-@routes.route('/signup', methods=['GET', 'POST'])
+@app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    form = SignupForm()
-    if form.validate_on_submit():
-        pseudo = form.pseudo.data
-        password = form.password.data
+    if request.method == 'POST':
+        pseudo = request.form['pseudo']
+        password = request.form['password']
 
-        # Vérification si le pseudo existe déjà
-        existing_user = User.query.filter_by(pseudo=pseudo).first()
-        if existing_user:
-            flash('Ce pseudo est déjà pris.', 'danger')
-            return redirect(url_for('routes.signup'))
+        # Vérification que le pseudo n'existe pas déjà
+        user = User.query.filter_by(pseudo=pseudo).first()
+        if user:
+            flash("Ce pseudo est déjà utilisé.", "error")
+            return redirect(url_for('signup'))
 
-        # Ajouter l'utilisateur dans la base de données
-        new_user = User(pseudo=pseudo, password=password)
+        # Vérification du mot de passe
+        if len(password) <= 10:
+            flash("Le mot de passe doit contenir plus de 10 caractères.", "error")
+            return redirect(url_for('signup'))
+        if not any(char.isdigit() for char in password):
+            flash("Le mot de passe doit contenir au moins un chiffre.", "error")
+            return redirect(url_for('signup'))
+        if not any(char.isupper() for char in password):
+            flash("Le mot de passe doit contenir une majuscule.", "error")
+            return redirect(url_for('signup'))
+        if not any(char in "!@#$%^&*()" for char in password):
+            flash("Le mot de passe doit contenir un caractère spécial.", "error")
+            return redirect(url_for('signup'))
+
+        # Créer un nouvel utilisateur
+        hashed_password = generate_password_hash(password)
+        new_user = User(pseudo=pseudo, password=hashed_password)
         db.session.add(new_user)
         db.session.commit()
 
-        flash('Inscription réussie !', 'success')
-        return redirect(url_for('routes.presentation'))
+        flash("Inscription réussie, vous pouvez maintenant vous connecter.", "success")
+        return redirect(url_for('signin'))
 
-    return render_template('signin.html', form=form)
+    return render_template('signup.html')
