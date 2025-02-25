@@ -3,22 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booster Test</title>
-    <link rel="stylesheet" href="static/style.css">
+    <title>Ouverture de Booster</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Ouvrir le Booster</h1>
-        <div class="booster">
-            <div class="card">Carte 1</div>
-            <div class="card">Carte 2</div>
-            <div class="card">Carte 3</div>
-            <div class="card">Carte 4</div>
-            <div class="card">Carte 5</div>
+    <div class="booster-container">
+        <h1>Ouvrir votre booster</h1>
+        <div class="booster-box" id="booster-box">
+            <div class="card" id="card1">Carte 1</div>
+            <div class="card" id="card2">Carte 2</div>
+            <div class="card" id="card3">Carte 3</div>
+            <div class="card" id="card4">Carte 4</div>
+            <div class="card" id="card5">Carte 5</div>
+            <div class="card" id="card6">Carte 6</div>
+            <div class="card" id="card7">Carte 7</div>
+            <div class="card" id="card8">Carte 8</div>
+            <div class="card" id="card9">Carte 9</div>
+            <div class="card" id="card10">Carte 10</div>
         </div>
-        <button onclick="openBooster()">Ouvrir le Booster</button>
+        <button class="btn" onclick="openBooster()">Ouvrir le booster</button>
     </div>
-    
-    <script src="static/booster.js"></script>
+    <script src="{{ url_for('static', filename='booster.js') }}"></script>
 </body>
 </html>
