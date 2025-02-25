@@ -1,44 +1,54 @@
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    font-family: 'Arial', sans-serif;
+    background-color: #222222;
+    color: #ffffff;
     margin: 0;
-    background-color: #f0f0f0;
+    padding: 0;
 }
 
-.container {
+.booster-container {
     text-align: center;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 50px;
 }
 
 h1 {
-    margin-bottom: 20px;
+    color: #ff6600;
+}
+
+.booster-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.card {
+    background-color: #333333;
+    width: 100px;
+    height: 140px;
+    margin: 10px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s ease;
+    opacity: 0;
+    transform: translateY(-50px);
 }
 
 .btn {
-    padding: 10px 20px;
-    margin: 10px;
-    font-size: 16px;
+    background-color: #ff6600;
     border: none;
-    border-radius: 5px;
+    padding: 10px 20px;
+    color: white;
     cursor: pointer;
-}
-
-.btn-signin {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.btn-signup {
-    background-color: #2196F3;
-    color: white;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background-color 0.3s;
 }
 
 .btn:hover {
-    opacity: 0.8;
+    background-color: #ff9900;
 }
